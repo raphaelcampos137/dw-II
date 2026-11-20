@@ -8,11 +8,10 @@ from dao.sala_dao import SalaDAO
 
 sala_bp = Blueprint("sala", __name__)
 
-
-# ===== ITEM 5 ========================================================
-# Hoje qualquer pessoa abre as paginas deste Blueprint sem entrar no
-# sistema. Escreva aqui a protecao, em um ponto so.
-# =====================================================================
+@sala_bp.before_request
+def verificar_login():
+    if "usuario_id" not in session:
+        return redirect(url_for("auth.login"))
 
 
 # Listagem (GET) e cadastro (POST) na mesma rota
