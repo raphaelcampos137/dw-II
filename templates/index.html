@@ -20,11 +20,13 @@
     <p class="aviso-js" id="aviso-js"></p>
   </div>
 
-  <!-- ===== ITEM 2 =====================================================
-       Acima da lista, exiba:
-         - havendo registros, a contagem, no formato:  N registro(s).
-         - nao havendo nenhum, a frase:  Nenhuma sala cadastrada.
-       ================================================================== -->
+   {% if salas %}
+    <p>{{ salas|length }} registro(s).</p>
+  {% else %}
+    <p>Nenhuma sala cadastrada.</p>
+  {% endif %}
+
+  <ul id="lista">
 
   <ul id="lista">
     {% for item in salas %}
@@ -33,13 +35,13 @@
         — {{ item.bloco }}
         — {{ item.capacidade }}
 
-      {% if salas %}
-    <p>{{ salas|length }} registro(s).</p>
-  {% else %}
-    <p>Nenhuma sala cadastrada.</p>
-  {% endif %}
+        <a href="{{ url_for('sala.editar', id=item.id) }}">editar</a>
 
-  <ul id="lista">
+        <form method="post" action="{{ url_for('sala.excluir', id=item.id) }}">
+          <button type="submit">excluir</button>
+        </form>
+      </li>
+    {% endfor %}
   </ul>
 
   <p class="escopos">
