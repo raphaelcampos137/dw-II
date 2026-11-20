@@ -33,13 +33,13 @@
         — {{ item.bloco }}
         — {{ item.capacidade }}
 
-        <a href="{{ url_for('sala.editar', id=item.id) }}">editar</a>
+      {% if salas %}
+    <p>{{ salas|length }} registro(s).</p>
+  {% else %}
+    <p>Nenhuma sala cadastrada.</p>
+  {% endif %}
 
-        <form method="post" action="{{ url_for('sala.excluir', id=item.id) }}">
-          <button type="submit">excluir</button>
-        </form>
-      </li>
-    {% endfor %}
+  <ul id="lista">
   </ul>
 
   <p class="escopos">
