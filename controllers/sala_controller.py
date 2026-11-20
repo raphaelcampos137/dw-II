@@ -28,10 +28,7 @@ def index():
         flash("Sala cadastrada.")
         return redirect(url_for("sala.index"))
 
-    # ===== ITEM 3 ====================================================
-    # Conte aqui, na SESSAO, quantas vezes esta pessoa abriu a listagem.
-    # A chave deve se chamar "acessos". O template ja exibe o valor.
-    # =================================================================
+       session["acessos"] = session.get("acessos", 0) + 1
 
     return render_template("index.html", salas=SalaDAO.listar())
 
