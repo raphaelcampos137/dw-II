@@ -7,10 +7,10 @@ from models.sala import Sala
 class SalaDAO:
 
     # CREATE
-    @staticmethod
+      @staticmethod
     def salvar(sala):
-     db.session.add(sala)
-    db.session.commit()
+        db.session.add(sala)
+        db.session.commit()
 
     # READ (todos)
     @staticmethod
