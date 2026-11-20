@@ -40,8 +40,12 @@ def buscar(id):
     return jsonify(sala.para_dicionario()), 200
 
 
-# ===== ITEM 9 ========================================================
-# Escreva aqui a rota DELETE /api/salas/<id>, que remove UM registro.
-# Sucesso: 204, sem corpo. Se o id nao existir: 404 com
-# {"erro": "Sala nao encontrada."}.
-# =====================================================================
+@api_bp.route("/salas/<int:id>", methods=["DELETE"])
+def excluir(id):
+    sala = SalaDAO.buscar_por_id(id)
+
+    if sala is None:
+        return jsonify({"erro": "Sala nao encontrada."}), 404
+
+    SalaDAO.excluir(sala)
+    return "", 204
